@@ -1,0 +1,27 @@
+# feeder
+feeder: feeders.feeder.Feeder
+test_feeder_args:
+  data_path: ./data/ntu/xview/val_data_bone_motion.npy
+  label_path: ./data/ntu/xview/val_label.pkl
+  debug: False
+
+# model
+model: model.Sgcn.Model
+model_args:
+  num_class: 60
+  num_point: 25
+  num_person: 2
+  graph: graph.four_part.Graph
+  graph_args:
+    labeling_mode: 'spatial'
+
+# test
+phase: test
+device: [0]
+test_batch_size: 64
+weights: ./runs/ntu_cv_sgcn_bone_motion-49-104400.pt 
+
+
+work_dir: ./work_dir/ntu/xview/sgcn_test_bone_motion
+model_saved_name: ./runs/ntu_cv_aagcn_test_bone_motion
+save_score: True
